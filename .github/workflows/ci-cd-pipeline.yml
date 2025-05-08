@@ -33,7 +33,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t iris-flask-app .  # Build the Docker image for the Flask app
+        docker build -t iris-ml-app .  # Build the Docker image for the Flask app
 
     - name: Push Docker image to DockerHub
       if: github.ref == 'refs/heads/main'  # Only push when changes are on the main branch
