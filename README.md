@@ -1,1 +1,1 @@
-![CI](https://github.com/<your-username>/<repo-name>/actions/workflows/<workflow-name>.yml/badge.svg)
+![CI](https://github.com/deoprakash/iris-flower-classification/actions/workflows/ci-cd-pipeline.yml/badge.svg)
