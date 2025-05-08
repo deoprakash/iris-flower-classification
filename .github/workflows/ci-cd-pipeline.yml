@@ -28,8 +28,9 @@ jobs:
 
     - name: Run tests (Optional)
       run: |
+             pytest 
         # If you have tests, you can run them here, for example with pytest:
-        pytest  # Uncomment and set up pytest if you have tests
+        # Uncomment and set up pytest if you have tests
 
     - name: Build Docker image
       run: |
