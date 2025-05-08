@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iris Classifier</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Iris Flower Prediction</h1>
+    <form id="irisForm">
+        <input type="number" step="any" placeholder="Sepal Length" id="sepal_len" required><br>
+        <input type="number" step="any" placeholder="Sepal Width" id="sepal_wid" required><br>
+        <input type="number" step="any" placeholder="Petal Length" id="petal_len" required><br>
+        <input type="number" step="any" placeholder="Petal Width" id="petal_wid" required><br>
+        <button type="submit">Predict</button>
+    </form>
+    <p id="result"></p>
+    <script src="/static/script.js"></script>
+</body>
+</html>
