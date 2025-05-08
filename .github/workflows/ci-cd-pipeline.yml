@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger when changes are pushed to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Checkout the code from the repository
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'  # Set Python version to 3.12
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Install dependencies
+
+    - name: Run tests (Optional)
+      run: |
+        # If you have tests, you can run them here, for example with pytest:
+        pytest  # Uncomment and set up pytest if you have tests
+
+    - name: Build Docker image
+      run: |
+        docker build -t iris-flask-app .  # Build the Docker image for the Flask app
+
+    - name: Push Docker image to DockerHub (Optional)
+      if: github.ref == 'refs/heads/main'  # Only push when changes are on the main branch
+      run: |
+        echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker tag iris-flask-app:latest ${{ secrets.DOCKER_USERNAME }}/iris-flask-app:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/iris-flask-app:latest  # Push Docker image to Docker Hub
+
+    - name: Deploy (Optional)
+      run: |
+        # Add deployment steps here (for example, to a cloud provider like AWS, DigitalOcean, etc.)
+        echo "Deploy your Docker image to production."
