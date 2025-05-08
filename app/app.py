@@ -5,6 +5,8 @@ import numpy as np
 app = Flask(__name__, static_folder='static', template_folder='templates')
 model = joblib.load('model.pkl')
 
+print("CI/CD pipeline test - version 1.0.1")
+
 @app.route('/')
 def home():
     return render_template('index.html')
