@@ -36,11 +36,11 @@ jobs:
         docker build -t iris-ml-app .  # Build the Docker image for the Flask app
 
     - name: Push Docker image to DockerHub
-      if: github.ref == 'refs/heads/main'  # Only push when changes are on the main branch
+      if: github.ref == 'refs/heads/main'
       run: |
-        echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        echo "${{ secrets.DOCKER_PAT }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
         docker tag iris-ml-app:latest ${{ secrets.DOCKER_USERNAME }}/iris-ml-app:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/iris-ml-app:latest  # Push Docker image to Docker Hub
+        docker push ${{ secrets.DOCKER_USERNAME }}/iris-ml-app:latest
 
     # Deployment step (optional, add your specific cloud or server deployment code here)
     - name: Deploy (Optional)
