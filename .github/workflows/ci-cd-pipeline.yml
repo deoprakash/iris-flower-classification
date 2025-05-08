@@ -23,27 +23,26 @@ jobs:
 
     - name: Install dependencies
       run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Install dependencies from requirements.txt
 
-
-    # - name: Run tests (Optional)
+    # Uncomment the following if you want to run tests during the build
+    # - name: Run tests
     #   run: |
-    #          pytest 
-    #     # If you have tests, you can run them here, for example with pytest:
-    #     # Uncomment and set up pytest if you have tests
+    #     pytest  # Run your tests here (uncomment this if you have tests)
 
     - name: Build Docker image
       run: |
         docker build -t iris-flask-app .  # Build the Docker image for the Flask app
 
-    - name: Push Docker image to DockerHub (Optional)
+    - name: Push Docker image to DockerHub
       if: github.ref == 'refs/heads/main'  # Only push when changes are on the main branch
       run: |
         echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
         docker tag iris-flask-app:latest ${{ secrets.DOCKER_USERNAME }}/iris-flask-app:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/iris-flask-app:latest  # Push Docker image to Docker Hub
 
+    # Deployment step (optional, add your specific cloud or server deployment code here)
     - name: Deploy (Optional)
       run: |
         # Add deployment steps here (for example, to a cloud provider like AWS, DigitalOcean, etc.)
