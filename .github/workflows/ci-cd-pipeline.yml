@@ -39,11 +39,12 @@ jobs:
       if: github.ref == 'refs/heads/main'  # Only push when changes are on the main branch
       run: |
         echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-        docker tag iris-flask-app:latest ${{ secrets.DOCKER_USERNAME }}/iris-flask-app:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/iris-flask-app:latest  # Push Docker image to Docker Hub
+        docker tag iris-ml-app:latest ${{ secrets.DOCKER_USERNAME }}/iris-ml-app:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/iris-ml-app:latest  # Push Docker image to Docker Hub
 
     # Deployment step (optional, add your specific cloud or server deployment code here)
     - name: Deploy (Optional)
       run: |
+            echo "Deploy your Docker image to production."
         # Add deployment steps here (for example, to a cloud provider like AWS, DigitalOcean, etc.)
-        echo "Deploy your Docker image to production."
+        
